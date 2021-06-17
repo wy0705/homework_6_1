@@ -37,4 +37,46 @@ public class Solution {
         }
         return Integer.parseInt(String.valueOf(target));
     }
+    public int minMoves(int[] nums) {
+        int n=0;
+        int maxindex=0;
+        boolean eq=true;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[0]!=nums[i]){
+                eq=false;
+            }
+        }
+        if (eq){
+            return 0;
+        }
+        while (true){
+            eq=true;
+            n++;
+            maxindex=max(nums);
+            for (int i = 0; i < nums.length; i++) {
+                if (i!=maxindex){
+                    nums[i]=nums[i]+1;
+                }
+            }
+            for (int i = 1; i < nums.length; i++) {
+                if (nums[0]!=nums[i]){
+                    eq=false;
+                    break;
+                }
+            }
+            if (eq) {
+                return n;
+            }
+        }
+    }
+    public int max(int[] nums){
+        int index=0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i]>nums[index]){
+                index=i;
+
+            }
+        }
+        return index;
+    }
 }
